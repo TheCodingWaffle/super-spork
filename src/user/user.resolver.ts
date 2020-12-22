@@ -1,12 +1,11 @@
 import { UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-
-import { CurrentUser } from './decorators';
-import { GqlAuthGuard } from './gql.strategy';
+import { CurrentUser } from '../core/decorators/decorators';
 import { User } from './user.entity';
 import { UserInput } from './user.input';
 import { UserService } from './user.service';
-import { UserUtils } from './user.util';
+import '../core/transformers/user.util';
+import { GqlAuthGuard } from 'src/core/strategies/gql.strategy';
 
 @Resolver(User)
 export class UserResolver {
@@ -37,13 +36,13 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(@Args('input') input: UserInput): Promise<User> {
-    return this.userService.createUser(UserUtils.ToEntity(input));
+    return this.userService.createUser(UserInput.prototype.toEntity(input));
   }
 
   @Mutation(() => Boolean)
   @UseGuards(GqlAuthGuard)
   async updateUser(@Args('input') input: UserInput): Promise<boolean> {
-    return this.userService.updateUser(UserUtils.ToEntity(input));
+    return this.userService.updateUser(UserInput.prototype.toEntity(input));
   }
 
   @Mutation(() => User)

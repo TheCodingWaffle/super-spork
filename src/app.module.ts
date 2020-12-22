@@ -3,7 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppService } from './app.service';
-import { GqlAuthGuard } from './user/gql.strategy';
+import { GqlAuthGuard } from './core/strategies/gql.strategy';
 import { UserModule } from './user/user.module';
 
 @Module({

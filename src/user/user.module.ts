@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtStrategy } from 'src/core/strategies/jwt.strategy';
 
-import { GqlAuthGuard } from './gql.strategy';
-import { JwtStrategy } from './jwt.strategy';
+import { GqlAuthGuard } from '../core/strategies/gql.strategy';
 import { User } from './user.entity';
 import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';
